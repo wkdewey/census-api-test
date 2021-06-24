@@ -15,11 +15,17 @@ class CensusAPI
   end
 
   def retrieve_place_data
-    url = "#{@@base_url}"
+    url = "#{@@base_url}group(#{@lookup}&for=place:#{@place}&in=#{@state}"
+    search = retrieve_data_from_url(url)
+    puts @artist_data
   end
 
-  def retrieve_data_from_url
-
+  def retrieve_data_from_url(url)
+    url = URI.parse(URI.escape(url))
+    HTTParty.get(url, 
+      {headers: {"Authorization" => "Bearer #{@token}"}}
+    )
   end
 
 end
+CensusAPI.new("B04004 040E", 43000, 27)
