@@ -22,7 +22,7 @@ class CensusAPI
   end
 
   def retrieve_data_from_url(url)
-    # url = URI.parse(URI.escape(url))
+    url = URI.parse(URI.escape(url))
     puts(url)
     HTTParty.get(url, 
       {headers: {"Authorization" => "Bearer #{@token}"}}
@@ -30,4 +30,17 @@ class CensusAPI
   end
 
 end
-CensusAPI.new("B04004_040E", 43000, 27)
+while true
+  puts "enter lookup code"
+  lookup_code = gets.strip
+  puts "enter city code"
+  city = gets.strip.to_s
+  puts "enter state code"
+  state = gets.strip.to_s
+  CensusAPI.new(lookup_code, city, state)
+  puts "another?"
+  response = gets.capitalize
+  if response == "N"
+    break
+  end
+end
