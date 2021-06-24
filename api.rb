@@ -15,8 +15,8 @@ class CensusAPI
   end
 
   def retrieve_place_data
-    url = "#{@@base_url}group(#{@lookup}&for=place:#{@place}&in=#{@state}"
-    search = retrieve_data_from_url(url)
+    url = "#{@@base_url}group(#{@lookup})&for=place:#{@place}&in=#{@state}"
+    @artist_data = retrieve_data_from_url(url)
     puts @artist_data
   end
 
@@ -28,4 +28,4 @@ class CensusAPI
   end
 
 end
-CensusAPI.new("B04004 040E", 43000, 27)
+CensusAPI.new("B04004_040E", 43000, 27)
